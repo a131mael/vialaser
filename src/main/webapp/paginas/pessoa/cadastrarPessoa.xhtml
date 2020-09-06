@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+		<h:form prependId="false" style="width:100%; border:none">
+
+			<h:panelGrid columns="0" width="100%;" styleClass="alinharTopo"	style="margin-top: -30px;width:92%">
+
+				<h:panelGrid id="panel" columns="1" border="0">
+				
+					<p:selectOneButton style="width: 256px;" value="#{pessoaController.tipoPessoa}" rendered="#{not pessoaController.editar}">
+							<f:selectItems value="#{pessoaController.tipoPessoaSelectIItem}"
+								var="tp" itemLabel="#{tp.label}" itemValue="#{tp}" />
+							<p:ajax event="change" process="@this" update="panel" />
+					</p:selectOneButton>			
+
+					<br/>
+					<ui:include src="cmpPessoaFisica.xhtml">
+		    					<ui:param name="parametro" value="#{pessoa}" />
+		    					<ui:param name="visible" value="#{pessoaController.renderizar(0)}" />
+					</ui:include>
+					
+					<ui:include src="cmpPessoaJuridica.xhtml">
+		    					<ui:param name="parametro" value="#{pessoa}" />
+		    					<ui:param name="visible" value="#{pessoaController.renderizar(1)}" />
+					</ui:include>
+
+
+				</h:panelGrid>
+
+			</h:panelGrid>
+
+
+			<h:commandButton id="salvarButtom"
+				style="margin-left:690px !important"
+				action="#{pessoaController.salvar()}" value="Salvar" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>

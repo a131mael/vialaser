@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	
+	<h:panelGrid columns="3" border="0" rendered="#{visible}" >
+
+		<h:outputLabel for="razao" value="Razão social(*):" style="font-size: 13px; width:180px" />
+		<p:inputText id="razao" title="" value="#{parametro.razaoSocial}" required="true" style="font-size: 15px; width:280px" />
+		<p:message for="razao" />
+		
+		<h:outputLabel for="fantasia" value="Nome fantasia:" style="font-size: 13px; width:180px" />
+		<p:inputText id="fantasia" title="" value="#{parametro.nomeFantasia}"	style="font-size: 15px; width:280px" />
+		<p:message for="fantasia" />
+	
+		<h:outputLabel for="cnpj"  value="CNPJ: " style="font-size: 13px; width:180px" />
+		<p:inputText id="cnpj" title="" value="#{parametro.cnpj}"	style="font-size: 15px; width:280px">
+			<f:validator for="inputcpf" validatorId="com.viaLaser.validator.CNPJValidator" />
+		</p:inputText>
+		<p:message for="cnpj" />
+		
+		<h:outputLabel for="telefonetemp"  value="Telefone: " style="font-size: 13px; width:180px" />
+		<h:panelGrid columns="2" style="border:none">
+			<p:inputMask id="telefonetemp" title="" value="#{pessoaController.telefoneTemp}" mask="(99) 9? 99999999"  style="font-size: 15px; width:280px" >
+				<p:ajax process="@this" event="change"/>
+			</p:inputMask>
+		</h:panelGrid>
+		<p:commandButton id="adicionarTelefone" icon="ui-icon-plus" >
+				<p:ajax event="click" process="@this,panelTelefones" update="panelTelefones,telefonetemp" listener="#{pessoaController.adicionarTelefone()}"/>
+		</p:commandButton>
+		
+		<h:outputText value=" " />
+		<h:panelGrid id="panelTelefones" >
+				<ui:repeat  var="telPj" value="#{parametro.telefones}" varStatus="status">
+					<p:panelGrid columns="2" style="width:100% !important">
+						<h:outputText value="#{telPj}" />
+						<p:commandButton id="adicionarTelefone" icon="ui-icon-trash" >
+							<p:ajax event="click" process="@this,panelTelefones" update="panelTelefones" listener="#{pessoaController.removerTelefone(status.index)}"/>
+						</p:commandButton>
+		
+					</p:panelGrid>
+				</ui:repeat>
+		</h:panelGrid>
+		<p:message for="panelTelefones" /> 
+		
+		<h:outputLabel for="site" value="Site: " style="font-size: 13px; width:180px" />
+		<p:inputText id="site" title="" value="#{parametro.site}" 	style="font-size: 15px; width:280px" />
+		<p:message for="site" />
+		
+	</h:panelGrid>
+	<h:panelGrid border="0" rendered="#{visible}" width="100%">
+		<hr/>
+	</h:panelGrid>
+
+</ui:composition>

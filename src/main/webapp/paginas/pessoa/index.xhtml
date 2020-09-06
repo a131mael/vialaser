@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+		
+		<h:form prependId="false" style="width:100%; border:none">
+
+			<h:panelGrid id="panelFerramentas" columns="21"	style="margin-top: -30px; ">
+				<p:tooltip for="adicionar" value="Adicionar um novo Cliente" position="top" />
+				<p:commandButton id="adicionar" icon="ui-icon-plus"	action="#{pessoaController.adicionar()}"  value="adicionar"/>
+				<p:tooltip for="editar" value="Editar" position="top" />
+				<p:commandButton id="editar" icon="ui-icon-pencil"	action="#{pessoaController.editar()}" alt="Editar"	
+					disabled="#{!pessoaController.isPessoaSelecionada()}" value="editar"/>
+				<p:tooltip for="remover" value="Remover" position="top" />
+				<p:commandButton id="remover" icon="ui-icon-trash"	update="@form" action="#{pessoaController.remover()}" alt="Remover"	
+					disabled="#{!pessoaController.isPessoaSelecionada()}" value="remover"/>
+			</h:panelGrid>
+			<br/>
+			<h:panelGrid width="98%">
+				<p:dataTable
+					currentPageReportTemplate="Exibindo: {startRecord}-{endRecord} de {totalRecords} Registros"
+					emptyMessage="Nenhum registro encontrado" selectionMode="single"
+					selection="#{pessoaController.pessoa}" rowKey="#{clienteTab.id}"
+					filterEvent="enter" lazy="true" liveResize="true"
+					styleClass="tabela" pageLinks="5" paginator="true"
+					paginatorPosition="bottom"
+					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} 
+                                         {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					resizableColumns="true" rows="20"
+					id="tbl" var="clienteTab"
+					value="#{pessoaController.lazyDataModel}">
+						
+						<p:ajax event="rowSelect" update="panelFerramentas" />
+					
+						<p:column style="width:60%; text-align:center;"	filterBy="#{clienteTab.nomeRazao}"	headerText="Nome / Razão Social">
+							<h:outputText value="#{clienteTab.nome}" rendered="#{pessoaController.isPessoaFisica(clienteTab)}"/>
+							<h:outputText value="#{clienteTab.razaoSocial}" rendered="#{ not pessoaController.isPessoaFisica(clienteTab)}"/>
+						</p:column>
+	
+						<p:column style="width:30%; text-align:center;"	filterBy="#{clienteTab.cpfCnpj}" headerText="CPF/CNPJ ">
+							<h:outputText value="#{clienteTab.cpf}" rendered="#{pessoaController.isPessoaFisica(clienteTab)}"/>
+							<h:outputText value="#{clienteTab.cnpj}" rendered="#{not pessoaController.isPessoaFisica(clienteTab)}"/>
+						</p:column>
+
+				</p:dataTable>
+
+			</h:panelGrid>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

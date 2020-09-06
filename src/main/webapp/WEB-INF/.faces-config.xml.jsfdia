@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#page#index.xhtml" PATH="/page/index.xhtml"
+  SHAPE="128,32,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#page#aluno#exibirAluno.xhtml"
+  PATH="/page/aluno/exibirAluno.xhtml" SHAPE="736,216,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#page#avaliacao#cadastrarAvaliacao.xhtml"
+  PATH="/page/avaliacao/cadastrarAvaliacao.xhtml" SHAPE="488,120,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#page#funcionario#cadastrarMotorista.xhtml"
+  PATH="/page/funcionario/cadastrarMotorista.xhtml"
+  SHAPE="536,384,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#page#admin#cadastrarUsuario.xhtml"
+  PATH="/page/admin/cadastrarUsuario.xhtml" SHAPE="944,120,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#paginas#pessoa#index.xhtml"
+  PATH="/paginas/pessoa/index.xhtml" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#paginas#pessoa#index.xhtml:0" NAME="item"
+   PATH="/paginas/pessoa/index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="novaPessoa::#paginas#pessoa#cadastrarPessoa.xhtml" NAME="output"
+    PATH="/paginas/pessoa/cadastrarPessoa.xhtml"
+    TARGET="rules:#paginas#pessoa#cadastrarPessoa.xhtml"
+    TITLE="novaPessoa" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="listarPessoas::#paginas#pessoa#index.xhtml"
+    NAME="output1" PATH="/paginas/pessoa/index.xhtml"
+    TARGET="rules:#paginas#pessoa#index.xhtml" TITLE="listarPessoas" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#paginas#pessoa#cadastrarPessoa.xhtml"
+  PATH="/paginas/pessoa/cadastrarPessoa.xhtml" SHAPE="256,33,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#paginas#pessoa#cadastrarPessoa.xhtml:0"
+   NAME="item" PATH="/paginas/pessoa/cadastrarPessoa.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="listarPessoas::#paginas#pessoa#index.xhtml"
+    NAME="output" PATH="/paginas/pessoa/index.xhtml"
+    TARGET="rules:#paginas#pessoa#index.xhtml" TITLE="listarPessoas" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>
